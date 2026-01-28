@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Humanitarian Aid Platform</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+body{
+font-family:Arial;
+margin-top:80px;
+background:#f4f4f4;
+}
+
+header{
+background:#212529;
+color:white;
+padding:15px;
+position:fixed;
+top:0;
+width:100%;
+z-index:1000;
+}
+
+header a{
+color:white;
+margin:10px;
+text-decoration:none;
+}
+
+.hero{
+background:#333;
+color:white;
+padding:100px 20px;
+text-align:center;
+}
+
+section{
+padding:40px 20px;
+}
+
+.card-box{
+background:white;
+padding:20px;
+margin:10px;
+border-radius:8px;
+box-shadow:0 0 5px #aaa;
+}
+
+table{
+background:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h3>Humanitarian Aid Platform</h3>
+<nav>
+<a href="#services">Services</a>
+<a href="#aid">Aid List</a>
+<a href="#contact">Request Aid</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Helping Gaza Together</h1>
+<p>Find and request humanitarian aid easily</p>
+<button id="showServices" class="btn btn-light">View Services</button>
+</section>
+
+<section id="services">
+<h2>Our Services</h2>
+<div class="row" id="serviceCards"></div>
+</section>
+
+<section id="aid">
+<h2>Aid Distribution List</h2>
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>Type</th>
+<th>Location</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="aidTable"></tbody>
+</table>
+</section>
+
+<section id="contact">
+<h2>Request Aid</h2>
+<form id="aidForm">
+<input type="text" id="name" class="form-control mb-2" placeholder="Your Name" required>
+<input type="text" id="area" class="form-control mb-2" placeholder="Your Area" required>
+<button class="btn btn-primary">Submit</button>
+</form>
+<p id="result" class="mt-3 text-success"></p>
+</section>
+
+<script>
+$(document).ready(function(){
+
+let services=["Food Aid","Medical Aid","Water Supply","Shelter"];
+
+let aidList=[
+{type:"Food",location:"North Gaza",status:"Available"},
+{type:"Water",location:"City Center",status:"Completed"},
+{type:"Medicine",location:"South Gaza",status:"Available"}
+];
+
+services.forEach(function(item){
+$("#serviceCards").append(
+"<div class='col-md-3'><div class='card-box'>"+item+"</div></div>"
+);
+});
+
+aidList.forEach(function(aid){
+let row="<tr><td>"+aid.type+"</td><td>"+aid.location+"</td><td>"+aid.status+"</td></tr>";
+$("#aidTable").append(row);
+});
+
+$("#showServices").click(function(){
+$("#services").slideToggle();
+});
+
+$("#aidForm").submit(function(e){
+e.preventDefault();
+$("#result").text("Your request has been submitted successfully!");
+});
+
+});
+</script>
+
+</body>
+</html>
